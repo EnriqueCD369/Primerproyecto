@@ -1,17 +1,23 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PrincipalController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
-use App\Http\Controllers\PrincipalController;
 
+Route::get('/', function () {
+    return view('welcome');
+})->name('vista_inicio');
 
-Route::get('/hello',HomeController::class);
-Route::get('/post/mensaje',[PostController::class,'Mensaje']);
-Route::get('post/about/{param?}/{name?}', [PostController::class, 'About']);
-  
-Route::get('/empresa',[HomeController::class, 'empresa'])->name('empresa');
+Route::get('/contact', function(){
+    $nombre = "Esmeralda Palomino";
+    return view('contact', ['nombre'=>$nombre, 'carrera'=>'LATI']);
+})->name('contact');
 
+Route::get('/principal', function(){
+    $datos = ["titulo"=>"Tienda Virtual - Vista Principal",
+    "mensaje"=>"Bienvenido a la vista principal"];
+    return view('principal', $datos);
+})->name('principal');
 
-
-
+Route::get('/empresa', [HomeController::class, 'empresa'])->name('empresa');
